@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Password Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+        input[type="password"] {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Challenge</h1>
+        <p>Inspect the page to find the first password.</p>
+
+        <!-- First step -->
+        <div id="step1">
+            <input id="password1" type="password" placeholder="Enter the first password">
+            <button onclick="checkPassword1()">Submit</button>
+            <p id="message1" class="hidden">Incorrect password. Try again!</p>
+        </div>
+
+        <!-- Second step (hidden by default) -->
+        <div id="step2" class="hidden">
+            <p>Good job! Now, enter the second password:</p>
+            <input id="password2" type="password" placeholder="Enter the second password">
+            <button onclick="checkPassword2()">Submit</button>
+            <p id="message2" class="hidden">Incorrect password. Try again!</p>
+        </div>
+    </div>
+
+    <script>
+        // Hidden passwords (visible in the developer tools)
+        const hiddenPassword1 = "developer123"; // First password
+        const hiddenPassword2 = "challenge456"; // Second password
+
+        function checkPassword1() {
+            const input = document.getElementById("password1").value;
+            const message1 = document.getElementById("message1");
+
+            if (input === hiddenPassword1) {
+                document.getElementById("step1").classList.add("hidden");
+                document.getElementById("step2").classList.remove("hidden");
+            } else {
+                message1.classList.remove("hidden");
+            }
+        }
+
+        function checkPassword2() {
+            const input = document.getElementById("password2").value;
+            const message2 = document.getElementById("message2");
+
+            if (input === hiddenPassword2) {
+                alert("Congratulations! You've completed the challenge.");
+            } else {
+                message2.classList.remove("hidden");
+            }
+        }
+    </script>
+
+    <!-- Hidden password hint -->
+    <div style="display: none;">
+        Hint: The first password is "developer123".
+    </div>
+</body>
+</html>
